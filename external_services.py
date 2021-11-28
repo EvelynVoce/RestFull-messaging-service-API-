@@ -6,19 +6,14 @@ import xml.etree.ElementTree as Et
 def generate_id():
     link: str = "https://www.random.org/strings/?"
     params: dict = dict(
-        num='1',
-        len='16',
-        digits='on',
-        upperalpha='on',
-        loweralpha="on",
-        unique="on",
-        format="html",
-        rnd="new"
+        num='1', len='16',
+        digits='on', upperalpha='on',
+        loweralpha="on", unique="on",
+        format="html", rnd="new"
     )
-
     resp = requests.get(url=link, params=params)
     page_soup = Soup(resp.text, "lxml")
-    return page_soup.find("pre", {"class": "data"}).text
+    return page_soup.find("pre", {"class": "data"}).text.strip()
 
 
 def get_temp():
@@ -26,9 +21,5 @@ def get_temp():
     resp = requests.get(url=base + "&q=London")
     xml_root = Et.fromstring(resp.text)
     current_condition = xml_root.find('current_condition')
-    temp_celsius = current_condition.find('temp_C').text
-    return temp_celsius
+    return current_condition.find('temp_C').text
 
-
-generate_id()
-get_temp()
