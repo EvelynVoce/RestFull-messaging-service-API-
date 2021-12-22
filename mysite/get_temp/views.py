@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import requests
 import xml.etree.ElementTree as Et
+from json import dumps
 
 
 def get_temp(request):
@@ -12,5 +13,7 @@ def get_temp(request):
     resp = requests.get(url=base + "&q=London")
     xml_root = Et.fromstring(resp.text)
     current_condition = xml_root.find('current_condition')
-    temp_in_celsius = current_condition.find('temp_C').text
-    return HttpResponse(temp_in_celsius)
+
+    temp = {'temp_celsius': int(current_condition.find('temp_C').text)}
+    temp_json = dumps(temp)
+    return HttpResponse(temp_json)

@@ -22,4 +22,3 @@ def get_temp():
     xml_root = Et.fromstring(resp.text)
     current_condition = xml_root.find('current_condition')
     return current_condition.find('temp_C').text
-

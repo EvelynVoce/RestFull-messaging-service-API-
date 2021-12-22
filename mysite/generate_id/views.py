@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 import requests
-from bs4 import BeautifulSoup as Soup
+from json import dumps
 
 
 def generate_id(request) -> HttpResponse:
@@ -13,9 +13,9 @@ def generate_id(request) -> HttpResponse:
         num='1', len='16',
         digits='on', upperalpha='on',
         loweralpha="on", unique="on",
-        format="html", rnd="new"
+        format="plain", rnd="new"
     )
     resp = requests.get(url=link, params=params)
-    page_soup = Soup(resp.text, "lxml")
-    generated_id: str = page_soup.find("pre", {"class": "data"}).text.strip()
-    return HttpResponse(generated_id)
+    temp = {'id': resp.text}
+    id_json = dumps(temp)
+    return HttpResponse(id_json)
