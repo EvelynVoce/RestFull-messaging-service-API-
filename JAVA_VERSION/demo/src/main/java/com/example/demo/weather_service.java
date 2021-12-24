@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+// http://localhost:8080/api/orchestrator?service=weather (just used for quick testing)
 public class weather_service {
-
     public static String get_weather() {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("lon", "-1.15");
         parameters.put("lat", "52.95");
         parameters.put("lang", "en");
+        parameters.put("product", "civillight");
         parameters.put("unit", "metric");
         parameters.put("output", "json");
 

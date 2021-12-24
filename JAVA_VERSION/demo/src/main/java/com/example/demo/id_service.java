@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// http://localhost:8080/api/SCC?service=ID (just used for quick testing)
+// http://localhost:8080/api/orchestrator?service=ID (just used for quick testing)
 public class id_service {
-
     public static String get_ID() {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("num", "1");
