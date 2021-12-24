@@ -11,7 +11,7 @@ public class id_service {
     public static String get_ID() {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("num", "1");
-        parameters.put("len", "16");
+        parameters.put("len", "8");
         parameters.put("digits", "on");
         parameters.put("upperalpha", "on");
         parameters.put("loweralpha", "on");
@@ -33,8 +33,8 @@ public class id_service {
         String url_str = "https://www.random.org/strings/?" + params_str;
         try {
             return get_response.main(url_str).toString();
-        } catch (IOException ex) {
-            Logger.getLogger(id_service.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            Logger.getLogger(id_service.class.getName()).log(Level.SEVERE, null, e);
             return "";
         }
     }

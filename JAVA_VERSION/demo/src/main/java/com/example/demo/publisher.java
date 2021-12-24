@@ -15,9 +15,9 @@ public class publisher {
     public static void main(String[] argv) throws Exception {
         // Connect to the RabbitMQ server
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        factory.setUsername("a");
-        factory.setPassword("a");
+        factory.setHost("152.71.155.95");
+        factory.setUsername("student");
+        factory.setPassword("COMP30231");
 
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {

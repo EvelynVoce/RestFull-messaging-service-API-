@@ -1,31 +1,14 @@
 package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.concurrent.TimeoutException;
-
-// https://www.rabbitmq.com/java-client.html
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/")
 public class Orchestrator {
-    private static enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-
-    ;
-    private final static String EXCHANGE_NAME = "hello";
-    // Set this for topic or direct exchanges. Leave empty for fanout.
-    private final static String TOPIC_KEY_NAME = ""; // For topic the format is keyword1.keyword2. and so on.
-
     @GetMapping("/orchestrator")
     public Serializable main(@RequestParam("service") String service) {
         HashMap<String, String> map = new HashMap<>();
