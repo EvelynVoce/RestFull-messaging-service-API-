@@ -25,11 +25,11 @@ public class id_service {
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
         }
 
-        return gen_ID(params_str);
+        return generate_ID(params_str);
     }
 
 
-    public static String gen_ID(String params_str)  {
+    public static String generate_ID(String params_str)  {
         String url_str = "https://www.random.org/strings/?" + params_str;
         try {
             return get_response.main(url_str).toString();

@@ -1,11 +1,8 @@
 package com.example.demo;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
-
 import java.nio.charset.StandardCharsets;
+import com.rabbitmq.client.DeliverCallback;
 
 public class subscriber {
 
@@ -16,16 +13,7 @@ public class subscriber {
     // For direct full name. For topic use * to match one word or # to match multiple: *.blue, red.#, etc. ^
 
     public static void main(String[] argv) throws Exception {
-
-        // Connect to the RabbitMQ server
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("152.71.155.95");
-        factory.setUsername("student");
-        factory.setPassword("COMP30231");
-
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
-
+        Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
         channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE.FANOUT.toString().toLowerCase());
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
