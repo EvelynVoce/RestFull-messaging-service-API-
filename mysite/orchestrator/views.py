@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import pika
-import requests
 
 # Create your views here.
 
@@ -11,7 +10,7 @@ def send_message(request):
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
 
-    message = "Message from RESTfull service"
+    message = "Message from RESTful service"
     channel.queue_declare(queue='hello')
     channel.basic_publish(exchange='',
                           routing_key='hello',

@@ -35,7 +35,7 @@ public class SCCExternalService1 {
 
         // Convert parameters to String
         String params_str = "";
-        for(var entry : parameters.entrySet()) {
+        for( Map.Entry<String, String> entry : parameters.entrySet()) {
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
         }
 

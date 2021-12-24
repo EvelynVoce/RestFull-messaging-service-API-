@@ -35,10 +35,15 @@ public class SCCExternalService2 {
 
         // Convert parameters to String
         String params_str = "";
-        for(var entry : parameters.entrySet()) {
+        for( Map.Entry<String, String> entry : parameters.entrySet()) {
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
-        }   
+        }
+        String ID = gen_ID(params_str);
+        System.out.println(ID);
+    }
 
+
+    public static String gen_ID(String params_str) throws MalformedURLException {
         String url_str = "https://www.random.org/strings/?";
         URL url = new URL(url_str + params_str);
         HttpURLConnection con;
@@ -54,13 +59,14 @@ public class SCCExternalService2 {
             while ((line =  reader.readLine()) != null){
                 responseContent.append(line);
             }
-            System.out.println(responseContent.toString());
             con.disconnect();
+            return responseContent.toString();
+
         } catch (IOException ex) {
             Logger.getLogger(SCCExternalService1.class.getName()).log(
                     Level.SEVERE, null, ex);
         }
-        
+        return "";
     }
     
 }
