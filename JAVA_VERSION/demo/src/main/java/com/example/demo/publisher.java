@@ -7,7 +7,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.nio.charset.StandardCharsets;
 
 public class publisher {
-    private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS};
+    private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
     private final static String EXCHANGE_NAME = "hello";
     private final static String TOPIC_KEY_NAME = ""; // Used in topic/direct exchanges. Format is keyword1.keyword2...
     private final static String message = "Hello World!";
