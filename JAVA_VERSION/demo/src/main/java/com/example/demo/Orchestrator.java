@@ -1,9 +1,8 @@
 package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.io.Serializable;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
@@ -37,13 +36,16 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
     }
 
-    public void submit_trip_proposal() throws IOException, TimeoutException {
+    @GetMapping("/orchestrator/submitTrip")
+    public void submit_trip_proposal(@RequestParam("message") String message) throws IOException, TimeoutException {
         /* Submit trip proposal message (use the exchange called TRAVEL_OFFERS):
         notify other users about a trip proposal. The message should contain the user
         ID (sender or receiver), the message ID, coordinates/name of the place of
         visit, and the proposed trip date no more than 14 days in the future. */
 
-        publisher.publish("hello", "", "");
+        // Get client's message
+        publisher new_publisher = new publisher("TRAVEL_OFFERS", "topic_name", message);
+        new_publisher.publish();
 
     }
 }

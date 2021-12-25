@@ -2,19 +2,29 @@ package com.example.demo;
 
 import com.rabbitmq.client.Channel;
 import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 import com.rabbitmq.client.DeliverCallback;
 
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    private final static String EXCHANGE_NAME = "hello";
-    private final static String QUEUE_NAME = "hello";
-    private final static String TOPIC_KEY_NAME = "";
+    private static String EXCHANGE_NAME;
+    private static String TOPIC_KEY_NAME;
+    private static String QUEUE_NAME;
+
+    public subscriber(String exchange_name, String topic_key_name, String message) {
+        this.EXCHANGE_NAME = "TRAVEL_OFFERS";
+        this.TOPIC_KEY_NAME = "topic_name";
+        this.QUEUE_NAME = "user_id_example";
+    }
+
     // For direct full name. For topic use * to match one word or # to match multiple: *.blue, red.#, etc. ^
 
-    public static void main(String[] argv) throws Exception {
+    public static void main(String[] argv) throws IOException, TimeoutException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
-        channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE.FANOUT.toString().toLowerCase());
+
+        channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE.TOPIC.toString().toLowerCase());
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         // Link the queue to the exchange
