@@ -3,12 +3,10 @@ package com.example.demo;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 // http://localhost:8080/api/orchestrator?service=ID (just used for quick testing)
 public class id_service {
-    public static String get_ID() {
+    public static String get_ID() throws IOException {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("num", "1");
         parameters.put("len", "8");
@@ -25,17 +23,6 @@ public class id_service {
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
         }
 
-        return generate_ID(params_str);
-    }
-
-
-    public static String generate_ID(String params_str)  {
-        String url_str = "https://www.random.org/strings/?" + params_str;
-        try {
-            return get_response.main(url_str).toString();
-        } catch (IOException e) {
-            Logger.getLogger(id_service.class.getName()).log(Level.SEVERE, null, e);
-            return "";
-        }
+        return get_response.main("https://www.random.org/strings/?" + params_str);
     }
 }

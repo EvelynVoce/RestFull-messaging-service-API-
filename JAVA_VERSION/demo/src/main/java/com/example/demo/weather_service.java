@@ -3,12 +3,10 @@ package com.example.demo;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 // http://localhost:8080/api/orchestrator?service=weather (just used for quick testing)
 public class weather_service {
-    public static String get_weather() {
+    public static String get_weather() throws IOException {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("lon", "-1.15");
         parameters.put("lat", "52.95");
@@ -24,13 +22,6 @@ public class weather_service {
         }
 
         String url_str = "https://www.7timer.info/bin/astro.php?" + params_str;
-        try {
-            return get_response.main(url_str).toString();
-        } catch (IOException ex) {
-            Logger.getLogger(weather_service.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
-        }
-
+        return get_response.main(url_str);
     }
-
 }

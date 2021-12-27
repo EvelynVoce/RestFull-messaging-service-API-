@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class get_response {
 
-    public static StringBuffer main(String url_str) throws IOException {
+    public static String main(String url_str) throws IOException {
         URL url = new URL(url_str);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
@@ -23,6 +23,6 @@ public class get_response {
             responseContent.append(line);
         }
         con.disconnect();
-        return responseContent;
+        return responseContent.toString();
     }
 }

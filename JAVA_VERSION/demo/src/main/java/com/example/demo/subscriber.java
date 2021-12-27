@@ -9,14 +9,14 @@ import com.rabbitmq.client.DeliverCallback;
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    private static String EXCHANGE_NAME;
-    private static String TOPIC_KEY_NAME;
-    private static String QUEUE_NAME;
+    private static String EXCHANGE_NAME = "TRAVEL_OFFERS";
+    private static String TOPIC_KEY_NAME = "topic_name";
+    private static String QUEUE_NAME = "user_id_example";
 
     public subscriber(String exchange_name, String topic_key_name, String message) {
         this.EXCHANGE_NAME = "TRAVEL_OFFERS";
         this.TOPIC_KEY_NAME = "topic_name";
-        this.QUEUE_NAME = "user_id_example";
+        this.QUEUE_NAME = "user_id_example"; // Change this with the unique user ID
     }
 
     // For direct full name. For topic use * to match one word or # to match multiple: *.blue, red.#, etc. ^
