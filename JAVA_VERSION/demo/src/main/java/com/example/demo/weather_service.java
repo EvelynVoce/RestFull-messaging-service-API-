@@ -21,7 +21,7 @@ public class weather_service {
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
         }
 
-        String url_str = "https://www.7timer.info/bin/astro.php?" + params_str;
-        return get_response.main(url_str);
+        String url = "https://www.7timer.info/bin/astro.php?" + params_str;
+        return get_response.main(url);
     }
 }

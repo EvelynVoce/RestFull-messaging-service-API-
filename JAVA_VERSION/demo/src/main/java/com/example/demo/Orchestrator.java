@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
@@ -27,17 +28,11 @@ public class Orchestrator {
         }
     }
 
-    public void query_message() {
-        /* Query message (use the exchange called TRAVEL_OFFERS): retrieve
-        information about upcoming trips. The response should contain the user
-        ID, the message ID, coordinates of the place of visit, and the
-        proposed trip date no more than 14 days in the future. In addition, when
-        relaying it to the client after a REST call, the service should append
-        the weather forecast for the location at the specified date. */
-    }
-
     @GetMapping("/orchestrator/submitTrip")
-    public void submit_trip_proposal(@RequestParam("userID") String userID, @RequestParam("location") String location) throws IOException, TimeoutException {
+    public void submit_trip_proposal(@RequestParam("userID") String userID,
+                                     @RequestParam("location") String location,
+                                     @RequestParam("date") String date)
+            throws IOException, TimeoutException, JSONException {
         /* Submit trip proposal message (use the exchange called TRAVEL_OFFERS):
         notify other users about a trip proposal. The message should contain the user
         ID (sender or receiver), the message ID, coordinates/name of the place of
@@ -48,10 +43,53 @@ public class Orchestrator {
         JSON_message.put("userID", userID);
         JSON_message.put("messageID", id_service.get_ID());
         JSON_message.put("location", location);
+        JSON_message.put("Date", date);
 
         // Publish client's message
         publisher new_publisher = new publisher("TRAVEL_OFFERS", "topic_name", JSON_message);
         new_publisher.publish();
+    }
 
+    @GetMapping("/orchestrator/queryMessage")
+    public void query_message() throws IOException, TimeoutException {
+        /* Query message (use the exchange called TRAVEL_OFFERS): retrieve
+        information about upcoming trips. The response should contain the user
+        ID, the message ID, coordinates of the place of visit, and the
+        proposed trip date no more than 14 days in the future. In addition, when
+        relaying it to the client after a REST call, the service should append
+        the weather forecast for the location at the specified date. */
+
+        subscriber new_subscriber = new subscriber("TRAVEL_OFFERS", "topic_name", "123");
+        String message =  new_subscriber.main().toString();
+    }
+
+    @GetMapping("/orchestrator/intentMessage")
+    public void intent_message(@RequestParam("userID") String userID,
+                                     @RequestParam("proposed_userID") String proposed_userID)
+            throws IOException, TimeoutException, JSONException {
+        /* Intent message (use the exchange called TRAVEL_INTENT): notify a user
+        who has published a trip proposal that another user is interested in the invite.
+        The message should contain the user ID, the ID of the user that has
+        submitted the proposal, and the message ID */
+
+        // Create JSON object
+        JSONObject JSON_message = new JSONObject();
+        JSON_message.put("userID", userID);
+        JSON_message.put("proposed_userID", proposed_userID);
+        JSON_message.put("messageID", id_service.get_ID());
+
+        // Publish client's message
+        publisher new_publisher = new publisher("TRAVEL_INTENT", "topic_name", JSON_message);
+        new_publisher.publish();
+    }
+
+    @GetMapping("/orchestrator/checkIntent")
+    public void check_intent_message() throws IOException, TimeoutException {
+        /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
+        information about other users’ interest in the user’s trip proposal. The service
+        response to a client REST call client should contain all the information sent in the Intent messages. */
+
+        subscriber new_subscriber = new subscriber("TRAVEL_INTENT", "topic_name", "123");
+        String message =  new_subscriber.main().toString();
     }
 }

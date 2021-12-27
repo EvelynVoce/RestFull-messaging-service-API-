@@ -10,14 +10,14 @@ import org.json.JSONObject;
 public class publisher {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    private static String EXCHANGE_NAME = "TRAVEL_OFFERS";
-    private static String TOPIC_KEY_NAME = "topic_name";
+    private static String EXCHANGE_NAME;
+    private static String TOPIC_KEY_NAME;
     private static JSONObject JSON_message;
 
     public publisher(String exchange_name, String topic_key_name, JSONObject message) {
-        this.EXCHANGE_NAME = exchange_name;
-        this.TOPIC_KEY_NAME = topic_key_name;
-        this.JSON_message = message;
+        EXCHANGE_NAME = exchange_name;
+        TOPIC_KEY_NAME = topic_key_name;
+        JSON_message = message;
     }
 
     public static void publish() throws IOException, TimeoutException {

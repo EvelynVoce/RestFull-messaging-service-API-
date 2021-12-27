@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import com.rabbitmq.client.AMQP;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class test_pub {
@@ -14,7 +15,7 @@ public class test_pub {
     private static String TOPIC_KEY_NAME = "topic_name";
     private static JSONObject JSON_message;
 
-    public static void main(String[] argv) throws IOException, TimeoutException {
+    public static void main(String[] argv) throws IOException, TimeoutException, JSONException {
 
         JSON_message = new JSONObject();
         JSON_message.put("userID", "12345678");

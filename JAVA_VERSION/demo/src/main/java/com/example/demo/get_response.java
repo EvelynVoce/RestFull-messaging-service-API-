@@ -17,7 +17,7 @@ public class get_response {
 
         BufferedReader reader;
         String line;
-        StringBuffer responseContent = new StringBuffer();
+        StringBuilder responseContent = new StringBuilder();
         reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
         while ((line = reader.readLine()) != null) {
             responseContent.append(line);
