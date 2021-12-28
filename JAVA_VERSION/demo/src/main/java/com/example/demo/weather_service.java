@@ -11,17 +11,15 @@ public class weather_service {
         parameters.put("lon", "-1.15");
         parameters.put("lat", "52.95");
         parameters.put("lang", "en");
-        parameters.put("product", "civillight");
         parameters.put("unit", "metric");
         parameters.put("output", "json");
 
         // Convert parameters to String
         String params_str = "";
-        for( Map.Entry<String, String> entry : parameters.entrySet()) {
+        for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
-        }
 
-        String url = "https://www.7timer.info/bin/astro.php?" + params_str;
+        String url = "https://www.7timer.info/bin/civillight.php?" + params_str;
         return get_response.main(url);
     }
 }

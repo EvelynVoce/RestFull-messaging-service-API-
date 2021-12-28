@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
 @CrossOrigin(origins = "*")
@@ -31,7 +33,7 @@ public class Orchestrator {
     @GetMapping("/orchestrator/submitTrip")
     public void submit_trip_proposal(@RequestParam("userID") String userID,
                                      @RequestParam("location") String location,
-                                     @RequestParam("date") String date)
+                                     @RequestParam("date") int date)
             throws IOException, TimeoutException, JSONException {
         /* Submit trip proposal message (use the exchange called TRAVEL_OFFERS):
         notify other users about a trip proposal. The message should contain the user
@@ -51,7 +53,7 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/queryMessage")
-    public void query_message() throws IOException, TimeoutException {
+    public void query_message() throws IOException, TimeoutException, JSONException {
         /* Query message (use the exchange called TRAVEL_OFFERS): retrieve
         information about upcoming trips. The response should contain the user
         ID, the message ID, coordinates of the place of visit, and the
@@ -60,7 +62,20 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
 
         subscriber new_subscriber = new subscriber("TRAVEL_OFFERS", "topic_name", "123");
-        String message =  new_subscriber.main().toString();
+        String message =  new_subscriber.main();
+        System.out.println("Orchestrator received" + message);
+
+        JSONObject json_message = new JSONObject(message);
+        int date = json_message.getInt("Date");
+
+        String weather = weather_service.get_weather();
+        JSONObject json = new JSONObject(weather);
+        String jsonString = json.getString("dataseries");
+        JSONArray jsonArray = new JSONArray(jsonString);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i); // 20211230
+            if (obj.getInt("date") == date) System.out.println(obj);
+        }
     }
 
     @GetMapping("/orchestrator/intentMessage")
@@ -79,17 +94,18 @@ public class Orchestrator {
         JSON_message.put("messageID", id_service.get_ID());
 
         // Publish client's message
-        publisher new_publisher = new publisher("TRAVEL_INTENT", "topic_name", JSON_message);
+        publisher new_publisher = new publisher("TRAVEL_INTENT", proposed_userID, JSON_message);
         new_publisher.publish();
     }
 
     @GetMapping("/orchestrator/checkIntent")
-    public void check_intent_message() throws IOException, TimeoutException {
+    public void check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
-        subscriber new_subscriber = new subscriber("TRAVEL_INTENT", "topic_name", "123");
+        String queue_name = UUID.randomUUID().toString();
+        subscriber new_subscriber = new subscriber("TRAVEL_INTENT", userID, queue_name);
         String message =  new_subscriber.main().toString();
     }
 }

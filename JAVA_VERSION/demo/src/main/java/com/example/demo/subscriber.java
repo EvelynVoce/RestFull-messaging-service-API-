@@ -21,9 +21,7 @@ public class subscriber {
         QUEUE_NAME = queue_name; // Change this with the unique user ID
     }
 
-    // For direct full name. For topic use * to match one word or # to match multiple: *.blue, red.#, etc. ^
-
-    public static AtomicReference<String> main() throws IOException, TimeoutException {
+    public static String main() throws IOException, TimeoutException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
 
         channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE.TOPIC.toString().toLowerCase());
@@ -32,15 +30,15 @@ public class subscriber {
         // Link the queue to the exchange
         channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, TOPIC_KEY_NAME); // last param = routing key used for direct/topic
         System.out.println(" [*] Waiting for " + TOPIC_KEY_NAME +  " messages. To exit press CTRL+C");
-
         // This code block indicates a callback which is like an event triggered ONLY when a message is received
-        AtomicReference<String> message = new AtomicReference<>();
+        final sync syncResult = new sync();
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            message.set(new String(delivery.getBody(), StandardCharsets.UTF_8));
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");
+            syncResult.setResult(message);
         };
         // Consume messages from the queue by using the callback
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
-        return message;
+        return syncResult.getResult();
     }
 }
