@@ -73,15 +73,20 @@ public class Orchestrator {
         String jsonString = json.getString("dataseries");
         JSONArray jsonArray = new JSONArray(jsonString);
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i); // 20211230
-            if (obj.getInt("date") == date) System.out.println(obj);
+            JSONObject obj = jsonArray.getJSONObject(i);
+            if (obj.getInt("date") == date) {
+                json_message.put("weather", obj);
+                break;
+            }
         }
+
     }
 
     @GetMapping("/orchestrator/intentMessage")
     public void intent_message(@RequestParam("userID") String userID,
                                      @RequestParam("proposed_userID") String proposed_userID)
             throws IOException, TimeoutException, JSONException {
+        System.out.println(proposed_userID);
         /* Intent message (use the exchange called TRAVEL_INTENT): notify a user
         who has published a trip proposal that another user is interested in the invite.
         The message should contain the user ID, the ID of the user that has
@@ -99,13 +104,14 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/checkIntent")
-    public void check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
+    public void check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException {
+        System.out.println(userID);
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
         String queue_name = UUID.randomUUID().toString();
         subscriber new_subscriber = new subscriber("TRAVEL_INTENT", userID, queue_name);
-        String message =  new_subscriber.main().toString();
+        String message =  new_subscriber.main();
     }
 }

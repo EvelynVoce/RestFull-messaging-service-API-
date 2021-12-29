@@ -1,6 +1,9 @@
+
+/* I do not take credit for any code in this file. This class was found from the following website
+ https://stackoverflow.com/questions/6847870/return-string-from-a-callback-java by Mark Peters */
+
 package com.example.demo;
 
-// https://stackoverflow.com/questions/6847870/return-string-from-a-callback-java (Found here)
 public class sync {
     private static final long TIMEOUT = 20000L;
     private String result;

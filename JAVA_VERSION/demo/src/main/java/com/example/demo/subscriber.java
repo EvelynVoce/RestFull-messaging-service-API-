@@ -4,7 +4,6 @@ import com.rabbitmq.client.Channel;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicReference;
 
 import com.rabbitmq.client.DeliverCallback;
 

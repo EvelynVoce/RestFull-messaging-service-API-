@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import font
-import external_services
+import run_orchestrator as run_orc
 
 bg_col: str = "grey"
 fg_col: str = "white"
@@ -21,7 +21,7 @@ def underline(label):
 def update_id_box(id_box):
     id_box.config(state=tk.NORMAL)
     id_box.delete('1.0', tk.END)
-    id_box.insert(tk.INSERT, external_services.generate_id())
+    id_box.insert(tk.INSERT, run_orc.get_id())
     id_box.config(state=tk.DISABLED)
 
 

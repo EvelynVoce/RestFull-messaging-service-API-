@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="17e09209-6dd8-4cba-9982-e0456e6cb9b6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Client/run_orchestrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/SCC.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/Orchestrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/Orchestrator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/publisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/publisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/subscriber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/sync.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/sync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_services.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/generate_id/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/get_temp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/views.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="22ea2z0z3WO4fvO4g6K47keX3xA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Client/main.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SCC" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="17e09209-6dd8-4cba-9982-e0456e6cb9b6" name="Changes" comment="" />
+      <created>1640200304015</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640200304015</updated>
+      <workItem from="1640400493121" duration="42000" />
+      <workItem from="1640400575287" duration="31000" />
+      <workItem from="1640791834318" duration="843000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SCC$main.coverage" NAME="main Coverage Results" MODIFIED="1640792642709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
