@@ -19,7 +19,6 @@ public class weather_service {
         for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
 
-        String url = "https://www.7timer.info/bin/civillight.php?" + params_str;
-        return get_response.main(url);
+        return get_response.main("https://www.7timer.info/bin/civillight.php?" + params_str);
     }
 }

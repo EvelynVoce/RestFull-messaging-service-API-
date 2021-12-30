@@ -30,6 +30,7 @@ public class Orchestrator {
         }
     }
 
+    // http://localhost:8080/api/orchestrator/submitTrip?userID=12345&location=London&date=20211230
     @GetMapping("/orchestrator/submitTrip")
     public void submit_trip_proposal(@RequestParam("userID") String userID,
                                      @RequestParam("location") String location,
@@ -45,7 +46,7 @@ public class Orchestrator {
         JSON_message.put("userID", userID);
         JSON_message.put("messageID", id_service.get_ID());
         JSON_message.put("location", location);
-        JSON_message.put("Date", date);
+        JSON_message.put("date", date);
 
         // Publish client's message
         publisher new_publisher = new publisher("TRAVEL_OFFERS", "topic_name", JSON_message);
