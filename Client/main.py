@@ -47,7 +47,7 @@ def submit_proposal_ui():
 
     submit_proposal_button = tk.Button(root, text="Submit Proposal", font=("arial", 10, "bold"), bg=button_col,
                                        command=lambda: run_orc.submit_proposal(ID, location.get(), date.get()) or
-                                                       clear_root() or main())
+                                       clear_root() or main())
     submit_proposal_button.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 
@@ -60,7 +60,7 @@ def send_intent_ui():
 
     submit_intent_button = tk.Button(root, text="Submit Intent", font=("arial", 10, "bold"), bg=button_col,
                                      command=lambda: run_orc.send_intent(ID, proposed_user_entry.get()) or
-                                                     clear_root() or main())
+                                     clear_root() or main())
     submit_intent_button.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 
@@ -95,7 +95,7 @@ def main():
     check_intent_button = tk.Button(root, text="Check Intent", font=("arial", 10, "bold"),
                                     bg=button_col, command=lambda: clear_root() or
                                     Thread(target=run_orc.check_intent(ID),
-                                           daemon=True).start())
+                                           daemon=True).start() or main())
     check_intent_button.place(relx=0.30, rely=0.5, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 

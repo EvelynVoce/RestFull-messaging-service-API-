@@ -27,4 +27,5 @@ def send_intent(user_id: str, proposed_user_id: str):
 
 def check_intent(user_id: str):
     url: str = f"http://localhost:8080/api/orchestrator/checkIntent?userID={user_id}"
-    get(url, stream=True)
+    response = get(url, stream=True)
+    print("Client recieved", response.json())

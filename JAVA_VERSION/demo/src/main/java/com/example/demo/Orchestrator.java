@@ -89,7 +89,7 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/checkIntent")
-    public void check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
+    public Serializable check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
         System.out.println(userID);
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
@@ -98,5 +98,10 @@ public class Orchestrator {
         String queue_name = UUID.randomUUID().toString();
         subscriber new_subscriber = new subscriber("TRAVEL_INTENT", userID, queue_name);
         String message =  new_subscriber.main(false);
+
+        System.out.println("Orchestrator received" + message);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("message", message);
+        return map;
     }
 }
