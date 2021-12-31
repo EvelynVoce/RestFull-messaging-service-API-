@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
@@ -50,8 +49,7 @@ public class Orchestrator {
         JSON_message.put("date", date);
 
         // Publish client's message
-        publisher new_publisher = new publisher("TRAVEL_OFFERS", "topic_name", JSON_message);
-        new_publisher.publish();
+        publisher.publish("TRAVEL_OFFERS", "topic_name", JSON_message);
     }
 
     @GetMapping("/orchestrator/queryMessage")
@@ -63,8 +61,8 @@ public class Orchestrator {
         relaying it to the client after a REST call, the service should append
         the weather forecast for the location at the specified date. */
 
-        subscriber new_subscriber = new subscriber("TRAVEL_OFFERS", "topic_name", "123");
-        String message =  new_subscriber.main(true);
+        String message =  subscriber.main("TRAVEL_OFFERS", "topic_name", "123", true);
+        System.out.println("Orchestrator received query" + message);
     }
 
     @GetMapping("/orchestrator/intentMessage")
@@ -84,8 +82,7 @@ public class Orchestrator {
         JSON_message.put("messageID", id_service.get_ID());
 
         // Publish client's message
-        publisher new_publisher = new publisher("TRAVEL_INTENT", proposed_userID, JSON_message);
-        new_publisher.publish();
+        publisher.publish("TRAVEL_INTENT", proposed_userID, JSON_message);
     }
 
     @GetMapping("/orchestrator/checkIntent")
@@ -96,8 +93,7 @@ public class Orchestrator {
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
         String queue_name = UUID.randomUUID().toString();
-        subscriber new_subscriber = new subscriber("TRAVEL_INTENT", userID, queue_name);
-        String message =  new_subscriber.main(false);
+        String message =  subscriber.main("TRAVEL_INTENT", userID, queue_name, false);
 
         System.out.println("Orchestrator received" + message);
         HashMap<String, String> map = new HashMap<>();

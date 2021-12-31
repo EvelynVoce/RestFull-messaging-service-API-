@@ -94,8 +94,7 @@ def main():
 
     check_intent_button = tk.Button(root, text="Check Intent", font=("arial", 10, "bold"),
                                     bg=button_col, command=lambda: clear_root() or
-                                    Thread(target=run_orc.check_intent(ID),
-                                           daemon=True).start() or main())
+                                    run_orc.check_intent(ID) or main())
     check_intent_button.place(relx=0.30, rely=0.5, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 
