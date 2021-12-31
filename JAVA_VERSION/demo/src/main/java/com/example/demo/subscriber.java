@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import com.rabbitmq.client.DeliverCallback;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class subscriber {
 
@@ -20,7 +23,7 @@ public class subscriber {
         QUEUE_NAME = queue_name; // Change this with the unique user ID
     }
 
-    public static String main() throws IOException, TimeoutException {
+    public static String main(boolean query_message) throws IOException, TimeoutException, JSONException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
 
         channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE.TOPIC.toString().toLowerCase());
@@ -33,11 +36,35 @@ public class subscriber {
         final sync syncResult = new sync();
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + message + "'");
             syncResult.setResult(message);
+            JSONObject json_message = null;
+            try {
+                json_message = get_json(message, query_message);
+                System.out.println(" [x] Received '" + json_message + "'");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         };
         // Consume messages from the queue by using the callback
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
         return syncResult.getResult();
+    }
+
+    public static JSONObject get_json(String message, boolean query_message) throws JSONException, IOException {
+        JSONObject json_message = new JSONObject(message);
+        if (!query_message) return json_message;
+        int date = json_message.getInt("date");
+        String weather = weather_service.get_weather();
+        JSONObject json = new JSONObject(weather);
+        String jsonString = json.getString("dataseries");
+        JSONArray jsonArray = new JSONArray(jsonString);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            if (obj.getInt("date") == date) {
+                json_message.put("weather", obj);
+                break;
+            }
+        }
+        return json_message;
     }
 }

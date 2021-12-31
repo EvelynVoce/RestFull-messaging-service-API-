@@ -12,6 +12,8 @@ root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenhe
 root.title("SCC")
 root.config(bg=bg_col)
 
+ID: str = ""
+
 
 def underline(label):
     f = font.Font(label, label.cget("font"))
@@ -22,7 +24,8 @@ def underline(label):
 def update_id_box(id_box):
     id_box.config(state=tk.NORMAL)
     id_box.delete('1.0', tk.END)
-    id_box.insert(tk.INSERT, run_orc.get_id())
+    global ID
+    id_box.insert(tk.INSERT, ID := run_orc.get_id())
     id_box.config(state=tk.DISABLED)
 
 
@@ -37,15 +40,28 @@ def submit_proposal_ui():
     date_label = tk.Label(root, text="Date:", font=("arial", 15, "bold"), fg=fg_col, bg=bg_col)
     date_label.place(relx=0.20, rely=0.45)
 
-    location_entry = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
-    location_entry.place(relx=0.30, rely=0.35, relwidth=0.5, relheight=0.05)
-    date_entry = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
-    date_entry.place(relx=0.30, rely=0.45, relwidth=0.5, relheight=0.05)
+    location = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
+    location.place(relx=0.30, rely=0.35, relwidth=0.5, relheight=0.05)
+    date = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
+    date.place(relx=0.30, rely=0.45, relwidth=0.5, relheight=0.05)
 
-    submit_proposal_button = tk.Button(root, text="Submit Proposal", font=("arial", 10, "bold"),
-                                       bg=button_col, command=lambda:
-                                       run_orc.submit_proposal(run_orc.get_id(), location_entry.get(), date_entry.get()))
+    submit_proposal_button = tk.Button(root, text="Submit Proposal", font=("arial", 10, "bold"), bg=button_col,
+                                       command=lambda: run_orc.submit_proposal(ID, location.get(), date.get()) or
+                                                       clear_root() or main())
     submit_proposal_button.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
+
+
+def send_intent_ui():
+    proposed_user_label = tk.Label(root, text="Proposed User ID:", font=("arial", 15, "bold"), fg=fg_col, bg=bg_col)
+    proposed_user_label.place(relx=0.20, rely=0.35)
+
+    proposed_user_entry = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
+    proposed_user_entry.place(relx=0.30, rely=0.35, relwidth=0.5, relheight=0.05)
+
+    submit_intent_button = tk.Button(root, text="Submit Intent", font=("arial", 10, "bold"), bg=button_col,
+                                     command=lambda: run_orc.send_intent(ID, proposed_user_entry.get()) or
+                                                     clear_root() or main())
+    submit_intent_button.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 
 def main():
@@ -54,6 +70,7 @@ def main():
     underline(page_title)
 
     id_box = tk.Text(root, wrap=tk.WORD, cursor="arrow", bd=8, relief=tk.GROOVE, font=("arial", 15))
+    id_box.insert(tk.END, ID)
     id_box.place(relx=0.78, rely=0.025, relwidth=0.19, relheight=0.05)
     id_box.config(state="disabled")
 
@@ -64,6 +81,22 @@ def main():
     submit_trip_proposal = tk.Button(root, text="Submit Proposal", font=("arial", 10, "bold"),
                                      bg=button_col, command=lambda: clear_root() or submit_proposal_ui())
     submit_trip_proposal.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
+
+    query_proposal = tk.Button(root, text="Query Proposal", font=("arial", 10, "bold"),
+                               bg=button_col, command=lambda: Thread(target=run_orc.query_proposal,
+                                                                     daemon=True).start())
+    query_proposal.place(relx=0.30, rely=0.3, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
+
+    send_intent_button = tk.Button(root, text="Send Intent", font=("arial", 10, "bold"),
+                                   bg=button_col, command=lambda: clear_root() or Thread(target=send_intent_ui,
+                                                                                         daemon=True).start())
+    send_intent_button.place(relx=0.30, rely=0.4, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
+
+    check_intent_button = tk.Button(root, text="Check Intent", font=("arial", 10, "bold"),
+                                    bg=button_col, command=lambda: clear_root() or
+                                    Thread(target=run_orc.check_intent(ID),
+                                           daemon=True).start())
+    check_intent_button.place(relx=0.30, rely=0.5, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 
 if __name__ == "__main__":

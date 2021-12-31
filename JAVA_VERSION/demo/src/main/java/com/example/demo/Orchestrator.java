@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/")
@@ -63,29 +64,12 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
 
         subscriber new_subscriber = new subscriber("TRAVEL_OFFERS", "topic_name", "123");
-        String message =  new_subscriber.main();
-        System.out.println("Orchestrator received" + message);
-
-        JSONObject json_message = new JSONObject(message);
-        int date = json_message.getInt("Date");
-
-        String weather = weather_service.get_weather();
-        JSONObject json = new JSONObject(weather);
-        String jsonString = json.getString("dataseries");
-        JSONArray jsonArray = new JSONArray(jsonString);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            if (obj.getInt("date") == date) {
-                json_message.put("weather", obj);
-                break;
-            }
-        }
-
+        String message =  new_subscriber.main(true);
     }
 
     @GetMapping("/orchestrator/intentMessage")
     public void intent_message(@RequestParam("userID") String userID,
-                                     @RequestParam("proposed_userID") String proposed_userID)
+                               @RequestParam("proposed_userID") String proposed_userID)
             throws IOException, TimeoutException, JSONException {
         System.out.println(proposed_userID);
         /* Intent message (use the exchange called TRAVEL_INTENT): notify a user
@@ -105,7 +89,7 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/checkIntent")
-    public void check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException {
+    public void check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
         System.out.println(userID);
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
@@ -113,6 +97,6 @@ public class Orchestrator {
 
         String queue_name = UUID.randomUUID().toString();
         subscriber new_subscriber = new subscriber("TRAVEL_INTENT", userID, queue_name);
-        String message =  new_subscriber.main();
+        String message =  new_subscriber.main(false);
     }
 }
