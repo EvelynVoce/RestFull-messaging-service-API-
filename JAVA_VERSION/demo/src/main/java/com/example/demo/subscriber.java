@@ -28,11 +28,11 @@ public class subscriber {
         final sync syncResult = new sync();
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            syncResult.setResult(message);
             JSONObject json_message;
             try {
                 json_message = get_json(message, query_message);
-                System.out.println(" [x] Received '" + json_message + "'");
+                syncResult.setResult(String.valueOf(json_message));
+                System.out.println(" [x] Subscriber received '" + json_message + "'");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -46,7 +46,11 @@ public class subscriber {
         JSONObject json_message = new JSONObject(message);
         if (!query_message) return json_message;
         int date = json_message.getInt("date");
-        String weather = weather_service.get_weather();
+        String lat = json_message.getString("lat");
+        String lon = json_message.getString("lon");
+        String weather = weather_service.get_weather(lat, lon);
+
+
         JSONObject json = new JSONObject(weather);
         String jsonString = json.getString("dataseries");
         JSONArray jsonArray = new JSONArray(jsonString);

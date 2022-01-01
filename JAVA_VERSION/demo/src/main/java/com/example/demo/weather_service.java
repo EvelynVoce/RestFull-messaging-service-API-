@@ -6,10 +6,10 @@ import java.util.Map;
 
 // http://localhost:8080/api/orchestrator?service=weather (just used for quick testing)
 public class weather_service {
-    public static String get_weather() throws IOException {
+    public static String get_weather(String lat, String lon) throws IOException {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("lon", "-1.15");
-        parameters.put("lat", "52.95");
+        parameters.put("lon", lon);
+        parameters.put("lat", lat);
         parameters.put("lang", "en");
         parameters.put("unit", "metric");
         parameters.put("output", "json");

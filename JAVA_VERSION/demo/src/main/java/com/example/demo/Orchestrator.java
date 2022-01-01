@@ -22,9 +22,9 @@ public class Orchestrator {
             case "ID":
                 map.put("id", id_service.get_ID());
                 return map;
-            case "weather":
-                map.put("temp", weather_service.get_weather());
-                return map;
+//            case "weather":
+//                map.put("temp", weather_service.get_weather());
+//                return map;
             default:
                 return "we do not offer that service";
         }
@@ -34,7 +34,9 @@ public class Orchestrator {
     @GetMapping("/orchestrator/submitTrip")
     public void submit_trip_proposal(@RequestParam("userID") String userID,
                                      @RequestParam("location") String location,
-                                     @RequestParam("date") int date)
+                                     @RequestParam("date") int date,
+                                     @RequestParam("lat") String lat,
+                                     @RequestParam("lon") String lon)
             throws IOException, TimeoutException, JSONException {
         /* Submit trip proposal message (use the exchange called TRAVEL_OFFERS):
         notify other users about a trip proposal. The message should contain the user
@@ -46,6 +48,8 @@ public class Orchestrator {
         JSON_message.put("userID", userID);
         JSON_message.put("messageID", id_service.get_ID());
         JSON_message.put("location", location);
+        JSON_message.put("lat", lat);
+        JSON_message.put("lon", lon);
         JSON_message.put("date", date);
 
         // Publish client's message
@@ -53,7 +57,7 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/queryMessage")
-    public void query_message() throws IOException, TimeoutException, JSONException {
+    public Serializable query_message() throws IOException, TimeoutException, JSONException {
         /* Query message (use the exchange called TRAVEL_OFFERS): retrieve
         information about upcoming trips. The response should contain the user
         ID, the message ID, coordinates of the place of visit, and the
@@ -63,13 +67,15 @@ public class Orchestrator {
 
         String message =  subscriber.main("TRAVEL_OFFERS", "topic_name", "123", true);
         System.out.println("Orchestrator received query" + message);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("message", message);
+        return map;
     }
 
     @GetMapping("/orchestrator/intentMessage")
     public void intent_message(@RequestParam("userID") String userID,
                                @RequestParam("proposed_userID") String proposed_userID)
             throws IOException, TimeoutException, JSONException {
-        System.out.println(proposed_userID);
         /* Intent message (use the exchange called TRAVEL_INTENT): notify a user
         who has published a trip proposal that another user is interested in the invite.
         The message should contain the user ID, the ID of the user that has
@@ -87,7 +93,6 @@ public class Orchestrator {
 
     @GetMapping("/orchestrator/checkIntent")
     public Serializable check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
-        System.out.println(userID);
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
         response to a client REST call client should contain all the information sent in the Intent messages. */
