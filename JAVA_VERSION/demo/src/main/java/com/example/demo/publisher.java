@@ -19,6 +19,6 @@ public class publisher {
                 topic_key_name, // This param is for the routing key, usually used for direct/ topic queues.
                 new AMQP.BasicProperties.Builder().deliveryMode(2).priority(1).build(),
                 message.toString().getBytes(StandardCharsets.UTF_8));
-        System.out.println(" [x] Sent '" + topic_key_name + ":" + message.toString() + "'");
+        System.out.println(" [x] Sent '" + topic_key_name + ":" + message + "'");
     }
 }
