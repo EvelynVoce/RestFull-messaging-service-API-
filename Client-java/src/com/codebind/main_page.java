@@ -1,6 +1,7 @@
 package com.codebind;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -9,7 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class test {
+public class main_page {
     private JButton proposalButton;
     private JPanel panelMain;
     private JTextField id_field;
@@ -18,13 +19,17 @@ public class test {
     private JButton sendIntentButton;
     private JButton checkIntentButton;
     private JButton generateIDButton;
+    private static JFrame frame = new JFrame("SCC Trips");
 
 
-    public test() {
+    public main_page() {
         proposalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("hello world! U just pressed my buttons");
+                frame.setVisible(false);
+                submit_proposal_page page = new submit_proposal_page();
+                page.main();
             }
         });
 
@@ -49,8 +54,8 @@ public class test {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("SCC Trips");
-        frame.setContentPane(new test().panelMain);
+        frame.setContentPane(new main_page().panelMain);
+        frame.setPreferredSize(new Dimension(800, 600));
         frame.pack();
         frame.setVisible(true);
     }

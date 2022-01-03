@@ -43,10 +43,8 @@ def send_intent(user_id: str, proposed_user_id: str):
 def check_intent(user_id: str, intent_box):
     url: str = f"http://localhost:8080/api/orchestrator/checkIntent?userID={user_id}"
     response = get(url, stream=True).json()
-    print("Client received intent", response)
-
     json_dict: dict = json.loads(response["message"])
-    print("Client received proposal", json_dict)
+    print("Client received intent", json_dict)
 
     message: str = f"Intent: {json_dict['userID']}, would like to join you on your trip"
     intent_box.config(state=tk.NORMAL)
