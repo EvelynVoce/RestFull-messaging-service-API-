@@ -2,8 +2,6 @@ package com.codebind;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +10,7 @@ import java.net.URL;
 
 public class main_page {
     private JButton proposalButton;
-    private JPanel panelMain;
+    JPanel panelMain;
     private JTextField id_field;
     private JLabel SCCTripsLabel;
     private JButton queryProposalButton;
@@ -23,32 +21,23 @@ public class main_page {
 
 
     public main_page() {
-        proposalButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("hello world! U just pressed my buttons");
-                frame.setVisible(false);
-                submit_proposal_page page = new submit_proposal_page();
-                page.main();
-            }
+        proposalButton.addActionListener(e -> {
+            System.out.println("hello world! U just pressed my buttons");
+            frame.setVisible(false);
+            submit_proposal_page page = new submit_proposal_page(frame);
+            page.main(id_field.getText(), frame);
         });
 
-        queryProposalButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        queryProposalButton.addActionListener(e -> {
 
-            }
         });
 
-        generateIDButton.addActionListener(new ActionListener()  {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                try {
-                    String id = run_orchestrator.main();
-                    id_field.setText(id);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+        generateIDButton.addActionListener(e -> {
+            try {
+                String id = run_orchestrator.get_id();
+                id_field.setText(id);
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
     }
