@@ -5,50 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17e09209-6dd8-4cba-9982-e0456e6cb9b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Client/run_orchestrator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SCC.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/Orchestrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/Orchestrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/publisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/publisher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/subscriber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/sync.java" beforeDir="false" afterPath="$PROJECT_DIR$/JAVA_VERSION/demo/src/main/java/com/example/demo/sync.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_services.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/generate_id/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/get_temp/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/mysite/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/orchestrator/views.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +27,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Client/main.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/JAVA_VERSION/demo" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -113,6 +70,7 @@
       <workItem from="1640400493121" duration="42000" />
       <workItem from="1640400575287" duration="31000" />
       <workItem from="1640791834318" duration="843000" />
+      <workItem from="1641152531439" duration="10000" />
     </task>
     <servers />
   </component>

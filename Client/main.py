@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import font
 import run_orchestrator as run_orc
 from threading import Thread
+import datetime
 
 bg_col: str = "grey"
 fg_col: str = "white"
@@ -44,6 +45,18 @@ def create_message_box():
     return txt_box
 
 
+def check_date(location: str, date_str: str):
+    converted_date = date_str[:4] + '-' + date_str[4:6] + '-' + date_str[6:]
+    date_obj = datetime.date.fromisoformat(converted_date)
+    now = datetime.datetime.now().date()
+    if not (date_obj - now).days <= 14:
+        print("Date not valid")
+        return
+    run_orc.submit_proposal(ID, location, date_str)
+    clear_root()
+    main()
+
+
 def submit_proposal_ui():
     location_label = tk.Label(root, text="Location:", font=("arial", 15, "bold"), fg=fg_col, bg=bg_col)
     location_label.place(relx=0.20, rely=0.35)
@@ -56,8 +69,7 @@ def submit_proposal_ui():
     date.place(relx=0.30, rely=0.45, relwidth=0.5, relheight=0.05)
 
     submit_proposal_button = tk.Button(root, text="Submit Proposal", font=("arial", 10, "bold"), bg=button_col,
-                                       command=lambda: run_orc.submit_proposal(ID, location.get(), date.get()) or
-                                       clear_root() or main())
+                                       command=lambda: check_date(location.get(), date.get()))
     submit_proposal_button.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 
@@ -100,7 +112,6 @@ def main():
 
     global text_box
     text_box = create_message_box()
-
     id_box = create_id_box()
 
     gen_id_button = tk.Button(root, text="Generate ID", font=("arial", 10, "bold"),

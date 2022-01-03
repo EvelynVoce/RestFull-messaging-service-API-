@@ -17,16 +17,12 @@ public class Orchestrator {
     @GetMapping("/orchestrator")
     public Serializable main(@RequestParam("service") String service) throws IOException {
         HashMap<String, String> map = new HashMap<>();
-
         switch (service) {
             case "ID":
                 map.put("id", id_service.get_ID());
                 return map;
-//            case "weather":
-//                map.put("temp", weather_service.get_weather());
-//                return map;
             default:
-                return "we do not offer that service";
+                return "We do not offer that service";
         }
     }
 
