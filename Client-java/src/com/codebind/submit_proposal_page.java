@@ -28,7 +28,7 @@ public class submit_proposal_page {
             }
 
             frame.setVisible(false);
-            frame.setContentPane(new main_page().panelMain);
+            frame.setContentPane(new main_page(userID).panelMain);
             frame.pack();
             frame.setVisible(true);
         });

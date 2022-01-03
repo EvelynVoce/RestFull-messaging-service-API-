@@ -9,18 +9,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class main_page {
-    private JButton proposalButton;
     JPanel panelMain;
     private JTextField id_field;
     private JLabel SCCTripsLabel;
+    private JButton proposalButton;
     private JButton queryProposalButton;
     private JButton sendIntentButton;
     private JButton checkIntentButton;
     private JButton generateIDButton;
     private static JFrame frame = new JFrame("SCC Trips");
+    private String id = "";
 
 
-    public main_page() {
+    public main_page(String id_param) {
+        id = id_param;
+        id_field.setText(id);
         proposalButton.addActionListener(e -> {
             System.out.println("hello world! U just pressed my buttons");
             frame.setVisible(false);
@@ -43,7 +46,7 @@ public class main_page {
     }
 
     public static void main(String[] args) {
-        frame.setContentPane(new main_page().panelMain);
+        frame.setContentPane(new main_page("").panelMain);
         frame.setPreferredSize(new Dimension(800, 600));
         frame.pack();
         frame.setVisible(true);
