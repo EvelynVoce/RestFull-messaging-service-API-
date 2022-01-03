@@ -24,8 +24,8 @@ public class main_page {
     public main_page(String id_param) {
         id = id_param;
         id_field.setText(id);
+
         proposalButton.addActionListener(e -> {
-            System.out.println("hello world! U just pressed my buttons");
             frame.setVisible(false);
             submit_proposal_page page = new submit_proposal_page(frame);
             page.main(id_field.getText(), frame);

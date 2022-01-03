@@ -26,7 +26,6 @@ public class submit_proposal_page {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
             frame.setVisible(false);
             frame.setContentPane(new main_page(userID).panelMain);
             frame.pack();
