@@ -45,6 +45,19 @@ public class run_orchestrator {
         return txt;
     }
 
+    public static void submit_intent(String user_id, String proposed_user_id) throws IOException {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("userID", user_id);
+        parameters.put("proposed_userID", proposed_user_id);
+
+        // Convert parameters to String
+        String params_str = "";
+        for( Map.Entry<String, String> entry : parameters.entrySet())
+            params_str += (entry.getKey() + "=" + entry.getValue() + "&");
+
+        main_page.get_response.main("http://localhost:8080/api/orchestrator/intentMessage?" + params_str);
+    }
+
     public static void main(String[] args) throws IOException {
         query_proposal_func();
     }

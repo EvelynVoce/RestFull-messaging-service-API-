@@ -2,6 +2,8 @@ package com.codebind;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,6 +50,12 @@ public class main_page {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        });
+
+        sendIntentButton.addActionListener(e -> {
+            frame.setVisible(false);
+            submit_intent page = new submit_intent(frame);
+            page.main(id_field.getText(), frame);
         });
     }
 
