@@ -19,6 +19,7 @@ public class main_page {
     private JButton generateIDButton;
     private static JFrame frame = new JFrame("SCC Trips");
     private String id = "";
+    private JTextArea messageList;
 
 
     public main_page(String id_param) {
@@ -32,7 +33,12 @@ public class main_page {
         });
 
         queryProposalButton.addActionListener(e -> {
-
+            try {
+                String txt = run_orchestrator.query_proposal_func();
+                messageList.append(txt);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         generateIDButton.addActionListener(e -> {
