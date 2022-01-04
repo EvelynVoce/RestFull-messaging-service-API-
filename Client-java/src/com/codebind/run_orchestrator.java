@@ -58,8 +58,15 @@ public class run_orchestrator {
         main_page.get_response.main("http://localhost:8080/api/orchestrator/intentMessage?" + params_str);
     }
 
-    public static void main(String[] args) throws IOException {
-        query_proposal_func();
-    }
 
+    public static String check_intent(String user_id) throws IOException {
+        String response = main_page.get_response.main(
+                "http://localhost:8080/api/orchestrator/checkIntent?userID=" + user_id);
+        JSONObject full_message = new JSONObject(response);
+        JSONObject message = new JSONObject(full_message.getString("message"));
+        System.out.println("Client received intent" + message);
+
+        String userID = message.getString("userID");
+        return "Intent: " + userID +" , would like to join you on your trip";
+    }
 }

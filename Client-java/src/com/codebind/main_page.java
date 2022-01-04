@@ -57,6 +57,15 @@ public class main_page {
             submit_intent page = new submit_intent(frame);
             page.main(id_field.getText(), frame);
         });
+
+        checkIntentButton.addActionListener(e ->{
+            try {
+                String txt = run_orchestrator.check_intent(id_field.getText());
+                messageList.append(txt);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public static void main(String[] args) {
