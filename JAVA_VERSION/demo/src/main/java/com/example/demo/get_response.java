@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+ 
 public class get_response {
 
     public static String main(String url_str) throws IOException {

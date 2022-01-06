@@ -54,7 +54,6 @@ public class run_orchestrator {
         String params_str = "";
         for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
-
         main_page.get_response.main("http://localhost:8080/api/orchestrator/intentMessage?" + params_str);
     }
 

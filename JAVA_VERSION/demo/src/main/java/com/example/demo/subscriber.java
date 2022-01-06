@@ -24,13 +24,13 @@ public class subscriber {
         // Link the queue to the exchange
         channel.queueBind(queue_name, exchange_name, topic_key_name); // last param = routing key used for direct/topic
         System.out.println(" [*] Waiting for " + topic_key_name +  " messages. To exit press CTRL+C");
+
         // This code block indicates a callback which is like an event triggered ONLY when a message is received
         final sync syncResult = new sync();
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            JSONObject json_message;
             try {
-                json_message = get_json(message, query_message);
+                JSONObject json_message = get_json(message, query_message);
                 syncResult.setResult(String.valueOf(json_message));
                 System.out.println(" [x] Subscriber received '" + json_message + "'");
             } catch (JSONException e) {
