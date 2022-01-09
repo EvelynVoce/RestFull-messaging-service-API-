@@ -15,18 +15,12 @@ import java.util.concurrent.TimeoutException;
 @RequestMapping("/api/")
 public class Orchestrator {
     @GetMapping("/orchestrator")
-    public Serializable main(@RequestParam("service") String service) throws IOException {
+    public Serializable get_id() throws IOException {
         HashMap<String, String> map = new HashMap<>();
-        switch (service) {
-            case "ID":
-                map.put("id", id_service.get_ID());
-                return map;
-            default:
-                return "We do not offer that service";
-        }
+        map.put("id", id_service.get_ID());
+        return map;
     }
 
-    // http://localhost:8080/api/orchestrator/submitTrip?userID=12345&location=London&date=20211230
     @GetMapping("/orchestrator/submitTrip")
     public void submit_trip_proposal(@RequestParam("userID") String userID,
                                      @RequestParam("location") String location,
@@ -61,8 +55,9 @@ public class Orchestrator {
         relaying it to the client after a REST call, the service should append
         the weather forecast for the location at the specified date. */
 
+        String queue_name = UUID.randomUUID().toString();
         subscriber sub = new subscriber();
-        sub.main("TRAVEL_OFFERS", "topic_name", "123", true);
+        sub.main("TRAVEL_OFFERS", "topic_name", queue_name, true);
         String message = sub.get_stored_message();
         while (message == "DEFAULT") {
             message = sub.get_stored_message();
@@ -103,6 +98,9 @@ public class Orchestrator {
         subscriber sub = new subscriber();
         sub.main("TRAVEL_INTENT", userID, queue_name, false);
         String message = sub.get_stored_message();
+        while (message == "DEFAULT") {
+            message = sub.get_stored_message();
+        }
 
         System.out.println("Orchestrator received" + message);
         HashMap<String, String> map = new HashMap<>();

@@ -27,12 +27,10 @@ public class subscriber {
         System.out.println(" [*] Waiting for " + topic_key_name +  " messages. To exit press CTRL+C");
 
         // This code block indicates a callback which is like an event triggered ONLY when a message is received
-        final sync syncResult = new sync();
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             try {
                 JSONObject json_message = get_json(message, query_message);
-                syncResult.setResult(String.valueOf(json_message));
                 System.out.println(" [x] Subscriber received '" + json_message + "'");
                 stored_message = json_message.toString();
             } catch (JSONException e) {
@@ -41,7 +39,6 @@ public class subscriber {
         };
         // Consume messages from the queue by using the callback
         channel.basicConsume(queue_name, true, deliverCallback, consumerTag -> { });
-//        return syncResult.getResult();
     }
 
     public static JSONObject get_json(String message, boolean query_message) throws JSONException, IOException {

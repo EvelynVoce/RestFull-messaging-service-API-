@@ -5,7 +5,7 @@ import json
 
 
 def get_id() -> str:
-    url: str = "http://localhost:8080/api/orchestrator?service=ID"
+    url: str = "http://localhost:8080/api/orchestrator"
     response = get(url, stream=True)
     return response.json()["id"]
 
