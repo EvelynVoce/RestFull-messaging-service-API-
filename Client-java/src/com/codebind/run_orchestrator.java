@@ -64,7 +64,6 @@ public class run_orchestrator {
         JSONObject full_message = new JSONObject(response);
         JSONObject message = new JSONObject(full_message.getString("message"));
         System.out.println("Client received intent" + message);
-
         String userID = message.getString("userID");
         return "Intent: " + userID +" , would like to join you on your trip";
     }

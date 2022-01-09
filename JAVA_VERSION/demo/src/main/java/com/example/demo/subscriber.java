@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    public static String stored_message = "DEFAULT";
+    private static String stored_message = "DEFAULT";
 
     public static void main(String exchange_name, String topic_key_name, String queue_name,
                               boolean query_message) throws IOException, TimeoutException, JSONException {

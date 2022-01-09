@@ -14,7 +14,8 @@ import java.util.concurrent.TimeoutException;
 @RestController
 @RequestMapping("/api/")
 public class Orchestrator {
-    @GetMapping("/orchestrator")
+
+    @GetMapping("/orchestrator/id")
     public Serializable get_id() throws IOException {
         HashMap<String, String> map = new HashMap<>();
         map.put("id", id_service.get_ID());
@@ -57,7 +58,7 @@ public class Orchestrator {
 
         String queue_name = UUID.randomUUID().toString();
         subscriber sub = new subscriber();
-        sub.main("TRAVEL_OFFERS", "topic_name", queue_name, true);
+        sub.main("TRAVEL_OFFERS", "topic_name", "123", true);
         String message = sub.get_stored_message();
         while (message == "DEFAULT") {
             message = sub.get_stored_message();
@@ -95,14 +96,14 @@ public class Orchestrator {
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
         String queue_name = UUID.randomUUID().toString();
-        subscriber sub = new subscriber();
-        sub.main("TRAVEL_INTENT", userID, queue_name, false);
-        String message = sub.get_stored_message();
+        subscriber sub2 = new subscriber();
+        sub2.main("TRAVEL_INTENT", userID, queue_name, false);
+        String message = sub2.get_stored_message();
         while (message == "DEFAULT") {
-            message = sub.get_stored_message();
+            message = sub2.get_stored_message();
         }
 
-        System.out.println("Orchestrator received" + message);
+        System.out.println("Orchestrator received intent" + message);
         HashMap<String, String> map = new HashMap<>();
         map.put("message", message);
         return map;
