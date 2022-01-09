@@ -28,7 +28,7 @@ def query_proposal_func(text_box):
     json_temps: dict = json_weather['temp2m']
     message: str = f"Proposal: {json_dict['userID']}. Wants to go to {json_dict['location']} on {json_dict['date']}" \
                    f". The weather will be {json_weather['weather']} with lowest temperatures of" \
-                   f" {json_temps['min']} and highs of {json_temps['max']} degrees celsius"
+                   f" {json_temps['min']} and highs of {json_temps['max']} degrees celsius\n"
     text_box.config(state=tk.NORMAL)
     text_box.insert(tk.INSERT, message)
     text_box.config(state=tk.DISABLED)
@@ -46,7 +46,7 @@ def check_intent(user_id: str, intent_box):
     json_dict: dict = json.loads(response["message"])
     print("Client received intent", json_dict)
 
-    message: str = f"Intent: {json_dict['userID']}, would like to join you on your trip"
+    message: str = f"Intent: {json_dict['userID']}, would like to join you on your trip\n"
     intent_box.config(state=tk.NORMAL)
     intent_box.insert(tk.INSERT, message)
     intent_box.config(state=tk.DISABLED)

@@ -13,8 +13,9 @@ import org.json.JSONObject;
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
+    public static String stored_message = "DEFAULT";
 
-    public static String main(String exchange_name, String topic_key_name, String queue_name,
+    public static void main(String exchange_name, String topic_key_name, String queue_name,
                               boolean query_message) throws IOException, TimeoutException, JSONException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
 
@@ -33,13 +34,14 @@ public class subscriber {
                 JSONObject json_message = get_json(message, query_message);
                 syncResult.setResult(String.valueOf(json_message));
                 System.out.println(" [x] Subscriber received '" + json_message + "'");
+                stored_message = json_message.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         };
         // Consume messages from the queue by using the callback
         channel.basicConsume(queue_name, true, deliverCallback, consumerTag -> { });
-        return syncResult.getResult();
+//        return syncResult.getResult();
     }
 
     public static JSONObject get_json(String message, boolean query_message) throws JSONException, IOException {
@@ -62,5 +64,11 @@ public class subscriber {
             }
         }
         return json_message;
+    }
+
+    public static String get_stored_message(){
+        String retrieved_message = stored_message;
+        if (retrieved_message != "DEFAULT") stored_message = "DEFAULT";
+        return retrieved_message;
     }
 }

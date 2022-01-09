@@ -61,8 +61,14 @@ public class Orchestrator {
         relaying it to the client after a REST call, the service should append
         the weather forecast for the location at the specified date. */
 
-        String message =  subscriber.main("TRAVEL_OFFERS", "topic_name", "123", true);
-        System.out.println("Orchestrator received query" + message);
+        subscriber sub = new subscriber();
+        sub.main("TRAVEL_OFFERS", "topic_name", "123", true);
+        String message = sub.get_stored_message();
+        while (message == "DEFAULT") {
+            message = sub.get_stored_message();
+        }
+
+        System.out.println("Orchestrator received query " + message);
         HashMap<String, String> map = new HashMap<>();
         map.put("message", message);
         return map;
@@ -94,7 +100,9 @@ public class Orchestrator {
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
         String queue_name = UUID.randomUUID().toString();
-        String message =  subscriber.main("TRAVEL_INTENT", userID, queue_name, false);
+        subscriber sub = new subscriber();
+        sub.main("TRAVEL_INTENT", userID, queue_name, false);
+        String message = sub.get_stored_message();
 
         System.out.println("Orchestrator received" + message);
         HashMap<String, String> map = new HashMap<>();
