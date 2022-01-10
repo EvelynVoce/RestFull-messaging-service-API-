@@ -13,10 +13,15 @@ import org.json.JSONObject;
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    private static String stored_message = "DEFAULT";
+    private String proposal_message = "DEFAULT";
+    private static boolean type;
 
-    public static void main(String exchange_name, String topic_key_name, String queue_name,
-                              boolean query_message) throws IOException, TimeoutException, JSONException {
+    public subscriber(boolean query_message){
+        type = query_message;
+    }
+
+    public void main(String exchange_name, String topic_key_name, String queue_name)
+            throws IOException, TimeoutException, JSONException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
 
         channel.exchangeDeclare(exchange_name, EXCHANGE_TYPE.TOPIC.toString().toLowerCase());
@@ -30,9 +35,9 @@ public class subscriber {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             try {
-                JSONObject json_message = get_json(message, query_message);
-                System.out.println(" [x] Subscriber received '" + json_message + "'");
-                stored_message = json_message.toString();
+                JSONObject json_message = get_json(message);
+                System.out.println(" [x] Subscriber received Query '" + json_message + "'");
+                proposal_message = json_message.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -41,9 +46,9 @@ public class subscriber {
         channel.basicConsume(queue_name, true, deliverCallback, consumerTag -> { });
     }
 
-    public static JSONObject get_json(String message, boolean query_message) throws JSONException, IOException {
+    public static JSONObject get_json(String message) throws JSONException, IOException {
         JSONObject json_message = new JSONObject(message);
-        if (!query_message) return json_message;
+        if (!type) return json_message;
         int date = json_message.getInt("date");
         String lat = json_message.getString("lat");
         String lon = json_message.getString("lon");
@@ -59,13 +64,12 @@ public class subscriber {
                 json_message.put("weather", obj);
                 break;
             }
+            else System.out.println("Date not found");
         }
         return json_message;
     }
 
-    public static String get_stored_message(){
-        String retrieved_message = stored_message;
-        if (retrieved_message != "DEFAULT") stored_message = "DEFAULT";
-        return retrieved_message;
+    public String get_stored_message(){
+        return proposal_message;
     }
 }

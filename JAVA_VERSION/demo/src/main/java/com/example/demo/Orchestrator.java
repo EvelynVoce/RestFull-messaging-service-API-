@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
@@ -14,7 +15,6 @@ import java.util.concurrent.TimeoutException;
 @RestController
 @RequestMapping("/api/")
 public class Orchestrator {
-
     @GetMapping("/orchestrator/id")
     public Serializable get_id() throws IOException {
         HashMap<String, String> map = new HashMap<>();
@@ -57,10 +57,10 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
 
         String queue_name = UUID.randomUUID().toString();
-        subscriber sub = new subscriber();
-        sub.main("TRAVEL_OFFERS", "topic_name", "123", true);
+        subscriber sub = new subscriber(true);
+        sub.main("TRAVEL_OFFERS", "topic_name", queue_name);
         String message = sub.get_stored_message();
-        while (message == "DEFAULT") {
+        while (Objects.equals(message, "DEFAULT")) {
             message = sub.get_stored_message();
         }
 
@@ -96,10 +96,10 @@ public class Orchestrator {
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
         String queue_name = UUID.randomUUID().toString();
-        subscriber sub2 = new subscriber();
-        sub2.main("TRAVEL_INTENT", userID, queue_name, false);
+        subscriber sub2 = new subscriber(false);
+        sub2.main("TRAVEL_INTENT", userID, queue_name);
         String message = sub2.get_stored_message();
-        while (message == "DEFAULT") {
+        while (Objects.equals(message, "DEFAULT")) {
             message = sub2.get_stored_message();
         }
 
