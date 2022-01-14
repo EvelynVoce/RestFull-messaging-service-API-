@@ -64,13 +64,12 @@ public class subscriber {
                 json_message.put("weather", obj);
                 break;
             }
-            else System.out.println("Date not found");
         }
         return json_message;
     }
 
     public String get_stored_message(){
-        System.out.print("");
+        // System.out.print("");
         return proposal_message;
     }
 }

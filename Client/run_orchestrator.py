@@ -6,6 +6,19 @@ import json
 root_host = "localhost:8080"
 # root_host = "20.127.1.49:8181"
 
+proposals = []
+
+
+def inserts(text_box, searched_location, specific_location):
+    text_box.config(state=tk.NORMAL)
+    text_box.delete('1.0', tk.END)
+    for proposal in proposals:
+        if specific_location and f"{searched_location}" in proposal:
+            text_box.insert(tk.INSERT, proposal)
+        elif not specific_location:
+            text_box.insert(tk.INSERT, proposal)
+    text_box.config(state=tk.DISABLED)
+
 
 def get_id() -> str:
     url: str = f"http://{root_host}/api/orchestrator/id"
@@ -33,7 +46,10 @@ def query_proposal_func(text_box):
                    f". The weather will be {json_weather['weather']} with lowest temperatures of" \
                    f" {json_temps['min']} and highs of {json_temps['max']} degrees celsius\n"
     text_box.config(state=tk.NORMAL)
-    text_box.insert(tk.INSERT, message)
+    proposals.append(message)
+    text_box.delete('1.0', tk.END)
+    for proposal in proposals:
+        text_box.insert(tk.INSERT, proposal)
     text_box.config(state=tk.DISABLED)
 
 

@@ -136,6 +136,17 @@ def main():
                                     bg=button_col, command=show_intent)
     check_intent_button.place(relx=0.30, rely=0.15, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
+    search = tk.Button(root, text="Search", font=("arial", 10, "bold"), bg=button_col,
+                       command=lambda: run_orc.inserts(text_box, search_box.get(), True))
+    search.place(relx=0.70, rely=0.15, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
+
+    search_box = tk.Entry(root, relief=tk.GROOVE, bd=8, font=("arial", 15))
+    search_box.place(relx=0.78, rely=0.125, relwidth=0.19, relheight=0.05)
+
+    reset_button = tk.Button(root, text="Show All", font=("arial", 10, "bold"), bg=button_col,
+                             command=lambda: run_orc.inserts(text_box, search_box.get(), False))
+    reset_button.place(relx=0.943, rely=0.15, relwidth=0.05, relheight=0.045, anchor=tk.CENTER)
+
 
 if __name__ == "__main__":
     main()
