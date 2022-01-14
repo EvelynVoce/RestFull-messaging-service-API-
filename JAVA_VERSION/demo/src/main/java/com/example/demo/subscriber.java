@@ -70,6 +70,7 @@ public class subscriber {
     }
 
     public String get_stored_message(){
+        System.out.print("");
         return proposal_message;
     }
 }
