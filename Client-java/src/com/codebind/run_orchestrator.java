@@ -6,9 +6,14 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+
 public class run_orchestrator {
+
+    // private static String root_host = "20.127.1.49:8181";
+    private static String root_host = "localhost:8080";
+
     public static String get_id() throws IOException {
-        String response = main_page.get_response.main("http://localhost:8080/api/orchestrator");
+        String response = main_page.get_response.main("http://" + root_host + "/api/orchestrator/id");
         JSONObject json_message = new JSONObject(response);
         return json_message.getString("id");
     }
@@ -26,11 +31,11 @@ public class run_orchestrator {
         for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
 
-        main_page.get_response.main("http://localhost:8080/api/orchestrator/submitTrip?" + params_str);
+        main_page.get_response.main("http://" + root_host + "/api/orchestrator/submitTrip?" + params_str);
     }
 
     public static String query_proposal_func() throws IOException {
-        String response = main_page.get_response.main("http://localhost:8080/api/orchestrator/queryMessage");
+        String response = main_page.get_response.main("http://" + root_host + "/api/orchestrator/queryMessage");
         JSONObject full_message = new JSONObject(response);
         JSONObject message = new JSONObject(full_message.getString("message"));
         System.out.println("Client received proposal" + message);
@@ -54,13 +59,13 @@ public class run_orchestrator {
         String params_str = "";
         for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str += (entry.getKey() + "=" + entry.getValue() + "&");
-        main_page.get_response.main("http://localhost:8080/api/orchestrator/intentMessage?" + params_str);
+        main_page.get_response.main("http://" + root_host + "/api/orchestrator/intentMessage?" + params_str);
     }
 
 
     public static String check_intent(String user_id) throws IOException {
         String response = main_page.get_response.main(
-                "http://localhost:8080/api/orchestrator/checkIntent?userID=" + user_id);
+                "http://" + root_host + "/api/orchestrator/checkIntent?userID=" + user_id);
         JSONObject full_message = new JSONObject(response);
         JSONObject message = new JSONObject(full_message.getString("message"));
         System.out.println("Client received intent" + message);
