@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class run_orchestrator {
 
     // private static String root_host = "20.127.1.49:8181";
-    private static String root_host = "localhost:8080";
+    private static final String root_host = "localhost:8080";
 
     public static String get_id() throws IOException {
         String response = main_page.get_response.main("http://" + root_host + "/api/orchestrator/id");
@@ -25,9 +25,9 @@ public class run_orchestrator {
         parameters.put("date", date);
 
         // Convert parameters to String
-        String params_str = "";
+        StringBuilder params_str = new StringBuilder();
         for( Map.Entry<String, String> entry : parameters.entrySet())
-            params_str += (entry.getKey() + "=" + entry.getValue() + "&");
+            params_str.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
 
         main_page.get_response.main("http://" + root_host + "/api/orchestrator/submitTrip?" + params_str);
     }
@@ -41,11 +41,10 @@ public class run_orchestrator {
         JSONObject json_weather = message.getJSONObject("weather");
         JSONObject json_temps = json_weather.getJSONObject("temp2m");
 
-        String txt = "Proposal: " + message.get("userID") + ". Wants to go to " + message.get("location") + " on "
+        return "Proposal: " + message.get("userID") + ". Wants to go to " + message.get("location") + " on "
                 + message.get("date") + ". The weather will be " + json_weather.getString("weather") +
                 " with lowest temperatures of " + json_temps.getInt("min") + " and highs of " +
                 json_temps.getInt("max") + " degrees celsius";
-        return txt;
     }
 
     public static void submit_intent(String user_id, String proposed_user_id) throws IOException {
@@ -54,9 +53,9 @@ public class run_orchestrator {
         parameters.put("proposed_userID", proposed_user_id);
 
         // Convert parameters to String
-        String params_str = "";
+        StringBuilder params_str = new StringBuilder();
         for( Map.Entry<String, String> entry : parameters.entrySet())
-            params_str += (entry.getKey() + "=" + entry.getValue() + "&");
+            params_str.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
         main_page.get_response.main("http://" + root_host + "/api/orchestrator/intentMessage?" + params_str);
     }
 

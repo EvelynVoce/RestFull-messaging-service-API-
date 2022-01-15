@@ -18,9 +18,9 @@ public class id_service {
         parameters.put("rnd", "new");
 
         // Convert parameters to String
-        String params_str = "";
+        StringBuilder params_str = new StringBuilder();
         for (Map.Entry<String, String> entry : parameters.entrySet())
-            params_str += (entry.getKey() + "=" + entry.getValue() + "&");
+            params_str.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
 
         return get_response.main("https://www.random.org/strings/?" + params_str);
     }
