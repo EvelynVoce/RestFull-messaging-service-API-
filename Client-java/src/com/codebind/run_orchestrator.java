@@ -13,7 +13,7 @@ public class run_orchestrator {
     private static final String root_host = "localhost:8080";
 
     public static String get_id() throws IOException {
-        String response = main_page.get_response.main("http://" + root_host + "/api/orchestrator/id");
+        String response = get_response.main("http://" + root_host + "/api/orchestrator/id");
         JSONObject json_message = new JSONObject(response);
         return json_message.getString("id");
     }
@@ -29,11 +29,11 @@ public class run_orchestrator {
         for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
 
-        main_page.get_response.main("http://" + root_host + "/api/orchestrator/submitTrip?" + params_str);
+        get_response.main("http://" + root_host + "/api/orchestrator/submitTrip?" + params_str);
     }
 
     public static String query_proposal_func() throws IOException {
-        String response = main_page.get_response.main("http://" + root_host + "/api/orchestrator/queryMessage");
+        String response = get_response.main("http://" + root_host + "/api/orchestrator/queryMessage");
         JSONObject full_message = new JSONObject(response);
         JSONObject message = new JSONObject(full_message.getString("message"));
         System.out.println("Client received proposal" + message);
@@ -56,12 +56,12 @@ public class run_orchestrator {
         StringBuilder params_str = new StringBuilder();
         for( Map.Entry<String, String> entry : parameters.entrySet())
             params_str.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
-        main_page.get_response.main("http://" + root_host + "/api/orchestrator/intentMessage?" + params_str);
+        get_response.main("http://" + root_host + "/api/orchestrator/intentMessage?" + params_str);
     }
 
 
     public static String check_intent(String user_id) throws IOException {
-        String response = main_page.get_response.main(
+        String response = get_response.main(
                 "http://" + root_host + "/api/orchestrator/checkIntent?userID=" + user_id);
         JSONObject full_message = new JSONObject(response);
         JSONObject message = new JSONObject(full_message.getString("message"));
