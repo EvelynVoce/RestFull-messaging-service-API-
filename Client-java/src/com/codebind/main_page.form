@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.codebind.main_page">
-  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="4" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="589" height="273"/>
+      <xy x="20" y="20" width="727" height="919"/>
     </constraints>
     <properties>
       <autoscrolls value="true"/>
@@ -74,7 +74,7 @@
       </component>
       <component id="14024" class="javax.swing.JTextField" binding="id_field">
         <constraints>
-          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="1" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="127" height="88"/>
           </grid>
         </constraints>
@@ -98,7 +98,7 @@
       </component>
       <hspacer id="721b0">
         <constraints>
-          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="25" height="51"/>
           </grid>
         </constraints>
@@ -112,12 +112,45 @@
       </hspacer>
       <component id="73d18" class="javax.swing.JTextArea" binding="messageList">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
         <properties>
           <background color="-393729"/>
+        </properties>
+      </component>
+      <component id="21dea" class="javax.swing.JTextField" binding="searchField">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-393729"/>
+          <foreground color="-15396076"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="a2d84" class="javax.swing.JButton" binding="SearchAll">
+        <constraints>
+          <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-6315099"/>
+          <foreground color="-15396076"/>
+          <hideActionText value="false"/>
+          <text value="Show All"/>
+        </properties>
+      </component>
+      <component id="579d3" class="javax.swing.JButton" binding="Search">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-6315099"/>
+          <foreground color="-15396076"/>
+          <text value="Search"/>
         </properties>
       </component>
     </children>

@@ -2,7 +2,13 @@ package com.codebind;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class main_page {
     JPanel panelMain;
@@ -14,9 +20,13 @@ public class main_page {
     private JButton checkIntentButton;
     private JButton generateIDButton;
     private static JFrame frame = new JFrame("SCC Trips");
-    private String id = "";
+    private String id;
     private JTextArea messageList;
+    private JTextField searchField;
+    private JButton SearchAll;
+    private JButton Search;
 
+    private static List<String> proposals =new ArrayList<String>();
 
     public main_page(String id_param) {
         id = id_param;
@@ -31,7 +41,17 @@ public class main_page {
         queryProposalButton.addActionListener(e -> {
             try {
                 String txt = run_orchestrator.query_proposal_func();
-                messageList.append(txt);
+                boolean unique_message = true;
+                for (String proposal : proposals) {
+                    if (proposal.equals(txt)) {
+                        unique_message = false;
+                        break;
+                    }
+                }
+                if (unique_message) {
+                    proposals.add(txt);
+                    messageList.append(txt + "\n");
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -59,6 +79,21 @@ public class main_page {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        });
+
+        Search.addActionListener(e ->{
+            messageList.setText("");
+            for (String proposal : proposals) {
+                if (proposal.contains(searchField.getText())){
+                    messageList.append(proposal + "\n");
+                };
+            }
+        });
+        SearchAll.addActionListener(e ->{
+            messageList.setText("");
+            for (String proposal : proposals) {
+                messageList.append(proposal + "\n");
+            };
         });
     }
 

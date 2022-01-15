@@ -56,7 +56,7 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
 
         String queue_name = UUID.randomUUID().toString();
-        sub.fan("TRAVEL_OFFERS2", queue_name);
+        sub.main("TRAVEL_OFFERS2", "", queue_name);
         String message = sub.get_stored_message();
         while (Objects.equals(message, "DEFAULT")) {
             message = sub.get_stored_message();

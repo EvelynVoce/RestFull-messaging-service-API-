@@ -14,10 +14,9 @@ public class get_response
         con.setRequestMethod("GET");
         con.connect();
 
-        BufferedReader reader;
         String line;
         StringBuilder responseContent = new StringBuilder();
-        reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
         while ((line = reader.readLine()) != null) {
             responseContent.append(line);
         }
