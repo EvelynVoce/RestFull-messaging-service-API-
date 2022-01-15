@@ -45,9 +45,7 @@ def query_proposal_func(text_box):
     text_box.config(state=tk.NORMAL)
     proposals.append(message)
     text_box.delete('1.0', tk.END)
-    for proposal in proposals:
-        text_box.insert(tk.INSERT, proposal)
-    text_box.config(state=tk.DISABLED)
+    inserts(text_box, json_dict['location'], False)
 
 
 def send_intent(user_id: str, proposed_user_id: str):

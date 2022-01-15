@@ -86,7 +86,8 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/checkIntent")
-    public Serializable check_intent_message(@RequestParam("userID") String userID) throws IOException, TimeoutException, JSONException {
+    public Serializable check_intent_message(@RequestParam("userID") String userID)
+            throws IOException, TimeoutException, JSONException {
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
         response to a client REST call client should contain all the information sent in the Intent messages. */

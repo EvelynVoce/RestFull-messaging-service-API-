@@ -11,7 +11,7 @@ import java.util.Map;
 public class weather_service {
 
     public static String convert_location(String location) throws IOException, JSONException {
-        String url = "https://api.opencagedata.com/geocode/v1/json?q=" + location +"a6399d45cf9b483fa08085e6958daa05";
+        String url = "https://api.opencagedata.com/geocode/v1/json?q=" + location +"&key=a6399d45cf9b483fa08085e6958daa05";
         String response = get_response.main(url);
         JSONArray json = new JSONObject(response).getJSONArray("results");
         JSONObject sw_coords = json.getJSONObject(0).getJSONObject("bounds").getJSONObject("southwest");
