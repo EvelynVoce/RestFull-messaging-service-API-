@@ -18,13 +18,11 @@ public class run_orchestrator {
         return json_message.getString("id");
     }
 
-    public static void submit_proposal(String user_id, String lat, String lon, String date) throws IOException {
+    public static void submit_proposal(String user_id, String location, String date) throws IOException {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("userID", user_id);
-        parameters.put("location", "unknown");
+        parameters.put("location", location);
         parameters.put("date", date);
-        parameters.put("lat", lat);
-        parameters.put("lon", lon);
 
         // Convert parameters to String
         String params_str = "";

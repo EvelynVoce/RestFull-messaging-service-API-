@@ -13,11 +13,11 @@ import org.json.JSONObject;
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    private String proposal_message = "DEFAULT";
-    private static boolean type;
+    private String sent_message = "DEFAULT";
+    private static boolean query_message;
 
     public subscriber(boolean query_message){
-        type = query_message;
+        this.query_message = query_message;
     }
 
     public void main(String exchange_name, String topic_key_name, String queue_name)
@@ -37,7 +37,7 @@ public class subscriber {
             try {
                 JSONObject json_message = get_json(message);
                 System.out.println(" [x] Subscriber received Query '" + json_message + "'");
-                proposal_message = json_message.toString();
+                sent_message = json_message.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -48,11 +48,10 @@ public class subscriber {
 
     public static JSONObject get_json(String message) throws JSONException, IOException {
         JSONObject json_message = new JSONObject(message);
-        if (!type) return json_message;
+        if (!query_message) return json_message;
         int date = json_message.getInt("date");
-        String lat = json_message.getString("lat");
-        String lon = json_message.getString("lon");
-        String weather = weather_service.get_weather(lat, lon);
+        String location = json_message.getString("location");
+        String weather = weather_service.convert_location(location);
 
 
         JSONObject json = new JSONObject(weather);
@@ -70,6 +69,6 @@ public class subscriber {
 
     public String get_stored_message(){
         // System.out.print("");
-        return proposal_message;
+        return sent_message;
     }
 }

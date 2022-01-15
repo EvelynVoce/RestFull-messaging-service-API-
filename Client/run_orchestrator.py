@@ -1,5 +1,4 @@
 from requests import get
-from geopy.geocoders import Nominatim
 import tkinter as tk
 import json
 
@@ -28,9 +27,7 @@ def get_id() -> str:
 
 def submit_proposal(user_id, location, date) -> None:
     url: str = f"http://{root_host}/api/orchestrator/submitTrip?"
-    geolocator = Nominatim(user_agent="Evelyn Voce")
-    place = geolocator.geocode(location)
-    url += f"userID={user_id}&location={location}&date={date}&lat={place.latitude}&lon={place.longitude}"
+    url += f"userID={user_id}&location={location}&date={date}"
     get(url, stream=True)
 
 

@@ -25,9 +25,7 @@ public class Orchestrator {
     @GetMapping("/orchestrator/submitTrip")
     public void submit_trip_proposal(@RequestParam("userID") String userID,
                                      @RequestParam("location") String location,
-                                     @RequestParam("date") int date,
-                                     @RequestParam("lat") String lat,
-                                     @RequestParam("lon") String lon)
+                                     @RequestParam("date") int date)
             throws IOException, TimeoutException, JSONException {
         /* Submit trip proposal message (use the exchange called TRAVEL_OFFERS):
         notify other users about a trip proposal. The message should contain the user
@@ -39,8 +37,6 @@ public class Orchestrator {
         JSON_message.put("userID", userID);
         JSON_message.put("messageID", id_service.get_ID());
         JSON_message.put("location", location);
-        JSON_message.put("lat", lat);
-        JSON_message.put("lon", lon);
         JSON_message.put("date", date);
 
         // Publish client's message
