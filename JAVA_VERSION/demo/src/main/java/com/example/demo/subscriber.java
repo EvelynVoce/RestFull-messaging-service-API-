@@ -20,6 +20,33 @@ public class subscriber {
         this.query_message = query_message;
     }
 
+
+    public void fan(String exchange_name, String queue_name)
+            throws IOException, TimeoutException {
+        Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
+
+        channel.exchangeDeclare(exchange_name, EXCHANGE_TYPE.FANOUT.toString().toLowerCase());
+        channel.queueDeclare(queue_name, true, false, false, null);
+
+        // Link the queue to the exchange
+        channel.queueBind(queue_name, exchange_name, ""); // last param = routing key used for direct/topic
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+
+        // This code block indicates a callback which is like an event triggered ONLY when a message is received
+        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            try {
+                JSONObject json_message = get_json(message);
+                System.out.println(" [x] Subscriber received Query '" + json_message + "'");
+                sent_message = json_message.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        };
+        // Consume messages from the queue by using the callback
+        channel.basicConsume(queue_name, true, deliverCallback, consumerTag -> { });
+    }
+
     public void main(String exchange_name, String topic_key_name, String queue_name)
             throws IOException, TimeoutException, JSONException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server

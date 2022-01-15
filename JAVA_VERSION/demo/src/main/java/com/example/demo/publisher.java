@@ -11,10 +11,11 @@ public class publisher {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
 
-    public static void publish(String exchange_name, String topic_key_name, JSONObject message) throws IOException, TimeoutException {
+    public static void publish(String exchange_name, String topic_key_name, JSONObject message, String channel_type)
+            throws IOException, TimeoutException {
         Channel channel = establish_connection.main(); // Connect to the RabbitMQ server
-
-        channel.exchangeDeclare(exchange_name, EXCHANGE_TYPE.TOPIC.toString().toLowerCase());
+        if (channel_type == "FANOUT") channel.exchangeDeclare(exchange_name, EXCHANGE_TYPE.FANOUT.toString().toLowerCase());
+        else channel.exchangeDeclare(exchange_name, EXCHANGE_TYPE.TOPIC.toString().toLowerCase());
         channel.basicPublish(exchange_name,
                 topic_key_name, // This param is for the routing key, usually used for direct/ topic queues.
                 new AMQP.BasicProperties.Builder().deliveryMode(2).priority(1).build(),

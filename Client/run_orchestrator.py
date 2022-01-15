@@ -43,7 +43,8 @@ def query_proposal_func(text_box):
                    f". The weather will be {json_weather['weather']} with lowest temperatures of" \
                    f" {json_temps['min']} and highs of {json_temps['max']} degrees celsius\n"
     text_box.config(state=tk.NORMAL)
-    proposals.append(message)
+    if message not in proposals:
+        proposals.append(message)
     text_box.delete('1.0', tk.END)
     inserts(text_box, json_dict['location'], False)
 

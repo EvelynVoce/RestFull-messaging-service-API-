@@ -15,6 +15,9 @@ import java.util.concurrent.TimeoutException;
 @RestController
 @RequestMapping("/api/")
 public class Orchestrator {
+
+    private static final subscriber sub = new subscriber(true);
+
     @GetMapping("/orchestrator/id")
     public Serializable get_id() throws IOException {
         HashMap<String, String> map = new HashMap<>();
@@ -40,7 +43,7 @@ public class Orchestrator {
         JSON_message.put("date", date);
 
         // Publish client's message
-        publisher.publish("TRAVEL_OFFERS", "topic_name", JSON_message);
+        publisher.publish("TRAVEL_OFFERS2", "", JSON_message, "FANOUT");
     }
 
     @GetMapping("/orchestrator/queryMessage")
@@ -53,8 +56,7 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
 
         String queue_name = UUID.randomUUID().toString();
-        subscriber sub = new subscriber(true);
-        sub.main("TRAVEL_OFFERS", "topic_name", queue_name);
+        sub.fan("TRAVEL_OFFERS2", queue_name);
         String message = sub.get_stored_message();
         while (Objects.equals(message, "DEFAULT")) {
             message = sub.get_stored_message();
@@ -82,7 +84,7 @@ public class Orchestrator {
         JSON_message.put("messageID", id_service.get_ID());
 
         // Publish client's message
-        publisher.publish("TRAVEL_INTENT", proposed_userID, JSON_message);
+        publisher.publish("TRAVEL_INTENT", proposed_userID, JSON_message, "TOPIC");
     }
 
     @GetMapping("/orchestrator/checkIntent")
