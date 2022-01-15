@@ -63,6 +63,7 @@ public class subscriber {
             JSONObject obj = jsonArray.getJSONObject(i);
             if (obj.getInt("date") == date) {
                 json_message.put("weather", obj);
+                System.out.println("fsd");
                 break;
             }
         }
@@ -70,7 +71,9 @@ public class subscriber {
     }
 
     public String get_stored_message(){
-        // System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
         return sent_message;
     }
 }

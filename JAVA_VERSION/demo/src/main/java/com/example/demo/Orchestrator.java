@@ -57,6 +57,7 @@ public class Orchestrator {
 
         String queue_name = UUID.randomUUID().toString();
         sub.main("TRAVEL_OFFERS2", "", queue_name);
+
         String message = sub.get_stored_message();
         while (Objects.equals(message, "DEFAULT")) {
             message = sub.get_stored_message();

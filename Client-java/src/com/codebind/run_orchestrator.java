@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 public class run_orchestrator {
 
-    // private static String root_host = "20.127.1.49:8181";
-    private static final String root_host = "localhost:8080";
+    private static String root_host = "20.127.1.49:8181";
+//    private static final String root_host = "localhost:8080";
 
     public static String get_id() throws IOException {
         String response = get_response.main("http://" + root_host + "/api/orchestrator/id");
@@ -49,7 +49,7 @@ public class run_orchestrator {
 
     public static void submit_intent(String user_id, String proposed_user_id) throws IOException {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("userID", user_id);
+        parameters.put("user_id", user_id);
         parameters.put("proposed_userID", proposed_user_id);
 
         // Convert parameters to String
