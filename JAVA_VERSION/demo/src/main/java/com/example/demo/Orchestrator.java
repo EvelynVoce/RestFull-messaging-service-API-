@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 
@@ -47,7 +47,7 @@ public class Orchestrator {
     }
 
     @GetMapping("/orchestrator/queryMessage")
-    public Serializable query_message() throws IOException, TimeoutException, JSONException {
+    public Serializable query_message() throws IOException, TimeoutException, ExecutionException, InterruptedException {
         /* Query message (use the exchange called TRAVEL_OFFERS): retrieve
         information about upcoming trips. The response should contain the user
         ID, the message ID, coordinates of the place of visit, and the
@@ -56,12 +56,7 @@ public class Orchestrator {
         the weather forecast for the location at the specified date. */
 
         String queue_name = UUID.randomUUID().toString();
-        sub.main("TRAVEL_OFFERS2", "", queue_name);
-
-        String message = sub.get_stored_message();
-        while (Objects.equals(message, "DEFAULT")) {
-            message = sub.get_stored_message();
-        }
+        String message = sub.main("TRAVEL_OFFERS2", "", queue_name);
 
         System.out.println("Orchestrator received query " + message);
         HashMap<String, String> map = new HashMap<>();
@@ -90,18 +85,19 @@ public class Orchestrator {
 
     @GetMapping("/orchestrator/checkIntent")
     public Serializable check_intent_message(@RequestParam("userID") String userID)
-            throws IOException, TimeoutException, JSONException {
+            throws IOException, TimeoutException, ExecutionException, InterruptedException {
         /* Check intent message (use the exchange called TRAVEL_ INTENT): retrieve
         information about other users’ interest in the user’s trip proposal. The service
         response to a client REST call client should contain all the information sent in the Intent messages. */
 
         String queue_name = UUID.randomUUID().toString();
         subscriber sub2 = new subscriber(false);
-        sub2.main("TRAVEL_INTENT", userID, queue_name);
-        String message = sub2.get_stored_message();
-        while (Objects.equals(message, "DEFAULT")) {
-            message = sub2.get_stored_message();
-        }
+        String message = sub2.main("TRAVEL_INTENT", userID, queue_name);
+
+//        String message = sub2.get_stored_message();
+//        while (Objects.equals(message, "DEFAULT")) {
+//            message = sub2.get_stored_message();
+//        }
 
         System.out.println("Orchestrator received intent" + message);
         HashMap<String, String> map = new HashMap<>();

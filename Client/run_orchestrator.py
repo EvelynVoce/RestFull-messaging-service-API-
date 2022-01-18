@@ -2,8 +2,8 @@ from requests import get
 import tkinter as tk
 import json
 
-# root_host = "localhost:8080"
-root_host = "20.127.1.49:8181"
+root_host = "localhost:8080"
+# root_host = "20.127.1.49:8181"
 
 proposals = []
 
