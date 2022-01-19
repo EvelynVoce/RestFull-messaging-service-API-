@@ -112,6 +112,7 @@ def main():
 
     global text_box
     text_box = create_message_box()
+    run_orc.inserts(text_box, "", False)
     id_box = create_id_box()
 
     gen_id_button = tk.Button(root, text="Generate ID", font=("arial", 10, "bold"),
