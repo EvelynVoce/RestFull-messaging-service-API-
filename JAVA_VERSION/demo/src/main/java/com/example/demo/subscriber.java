@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class subscriber {
 
     private enum EXCHANGE_TYPE {DIRECT, FANOUT, TOPIC, HEADERS}
-    private static boolean query_message;
+    private boolean query_message;
 
     public subscriber(boolean query_message){
         this.query_message = query_message;
@@ -52,7 +52,7 @@ public class subscriber {
         return future.get();
     }
 
-    public static JSONObject get_json(String message) throws JSONException, IOException {
+    public JSONObject get_json(String message) throws JSONException, IOException {
         JSONObject json_message = new JSONObject(message);
         if (!query_message) return json_message;
         int date = json_message.getInt("date");
