@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import font
 import run_orchestrator as run_orc
 from threading import Thread
-import datetime
+from datetime import datetime, timedelta
+from tkinter import messagebox
 
 bg_col: str = "grey"
 fg_col: str = "white"
@@ -45,16 +46,16 @@ def create_message_box():
     return txt_box
 
 
-def check_date(location: str, date_str: str):
-    converted_date = date_str[:4] + '-' + date_str[4:6] + '-' + date_str[6:]
-    date_obj = datetime.date.fromisoformat(converted_date)
-    now = datetime.datetime.now().date()
-    if not (date_obj - now).days <= 14:
-        print("Date not valid")
-        return
-    run_orc.submit_proposal(ID, location, date_str)
-    clear_root()
-    main()
+def check_date(location: str, given_date: str):
+    given_date_obj = datetime.strptime(given_date, "%Y%m%d").date()
+    current_date = datetime.date(datetime.now())
+    max_date = current_date + timedelta(days=7)
+    if (given_date_obj > max_date) or (given_date_obj < current_date):
+        messagebox.showinfo(message="Invalid date: Please pick a date no more than 7 days in the future")
+    else:
+        run_orc.submit_proposal(ID, location, given_date)
+        clear_root()
+        main()
 
 
 def submit_proposal_ui():
