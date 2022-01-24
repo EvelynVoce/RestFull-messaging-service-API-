@@ -4,6 +4,7 @@ import run_orchestrator as run_orc
 from threading import Thread
 from datetime import datetime, timedelta
 from tkinter import messagebox
+from tkcalendar import DateEntry
 
 bg_col: str = "grey"
 fg_col: str = "white"
@@ -47,15 +48,16 @@ def create_message_box():
 
 
 def check_date(location: str, given_date: str):
-    given_date_obj = datetime.strptime(given_date, "%Y%m%d").date()
+    formatted_date = given_date.strftime("%Y%m%d")
+    given_date_obj = datetime.strptime(formatted_date, "%Y%m%d").date()
     current_date = datetime.date(datetime.now())
     max_date = current_date + timedelta(days=7)
     if (given_date_obj > max_date) or (given_date_obj < current_date):
         messagebox.showinfo(message="Invalid date: Please pick a date no more than 7 days in the future")
-    else:
-        run_orc.submit_proposal(ID, location, given_date)
-        clear_root()
-        main()
+        return
+    run_orc.submit_proposal(ID, location, formatted_date)
+    clear_root()
+    main()
 
 
 def submit_proposal_ui():
@@ -66,11 +68,15 @@ def submit_proposal_ui():
 
     location = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
     location.place(relx=0.30, rely=0.35, relwidth=0.5, relheight=0.05)
-    date = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
-    date.place(relx=0.30, rely=0.45, relwidth=0.5, relheight=0.05)
+
+    # date = tk.Entry(root, relief=tk.GROOVE, bd=2, font=("arial", 13))
+    # date.place(relx=0.30, rely=0.45, relwidth=0.5, relheight=0.05)
+
+    date2 = DateEntry(root, selectmode='day')
+    date2.place(relx=0.30, rely=0.45, relwidth=0.5, relheight=0.05)
 
     submit_proposal_button = tk.Button(root, text="Submit Proposal", font=("arial", 10, "bold"), bg=button_col,
-                                       command=lambda: check_date(location.get(), date.get()))
+                                       command=lambda: check_date(location.get(), date2.get_date()))
     submit_proposal_button.place(relx=0.30, rely=0.2, relwidth=0.15, relheight=0.05, anchor=tk.CENTER)
 
 

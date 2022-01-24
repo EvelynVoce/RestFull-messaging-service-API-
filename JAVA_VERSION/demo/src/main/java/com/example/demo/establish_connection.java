@@ -11,13 +11,13 @@ public class establish_connection {
     public static Channel main() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
 
-        factory.setHost("152.71.155.95");
-        factory.setUsername("student");
-        factory.setPassword("COMP30231");
+//        factory.setHost("152.71.155.95");
+//        factory.setUsername("student");
+//        factory.setPassword("COMP30231");
 
-//        factory.setHost("localhost");
-//        factory.setUsername("guest");
-//        factory.setPassword("guest");
+        factory.setHost("localhost");
+        factory.setUsername("guest");
+        factory.setPassword("guest");
 
         Connection connection = factory.newConnection();
         return connection.createChannel();
